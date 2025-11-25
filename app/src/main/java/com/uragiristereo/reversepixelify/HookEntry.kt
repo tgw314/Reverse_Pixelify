@@ -29,6 +29,11 @@ class HookEntry : IYukiHookXposedInit {
                 className = "com.android.internal.util.crdroid.PixelPropsUtils",
                 methodName = "setProps",
             ),
+            PixelPropsUtilClass(
+                rom = "DerpFest",
+                className = "com.android.internal.util.PropImitationHooks",
+                methodName = "setProps",
+            ),
         )
     }
 
@@ -44,13 +49,13 @@ class HookEntry : IYukiHookXposedInit {
 
     override fun onHook() = encase {
         if (pixelPropUtilClass != null) {
-            loadApp {
+            loadZygote {
                 pixelPropUtilClass.className.hook {
                     injectMember {
                         method { name = pixelPropUtilClass.methodName }
 
                         beforeHook {
-                            log("Revert spoofing for $packageName")
+                            log("Revert spoofing globally")
 
                             resultNull()
                         }
