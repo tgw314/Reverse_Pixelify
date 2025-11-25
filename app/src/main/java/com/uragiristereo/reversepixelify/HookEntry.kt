@@ -49,13 +49,13 @@ class HookEntry : IYukiHookXposedInit {
 
     override fun onHook() = encase {
         if (pixelPropUtilClass != null) {
-            loadZygote {
+            loadApp {
                 pixelPropUtilClass.className.hook {
                     injectMember {
                         method { name = pixelPropUtilClass.methodName }
 
                         replaceUnit {
-                            log("Revert spoofing globally")
+                            log("Revert spoofing for all apps")
                         }
                     }
                 }
