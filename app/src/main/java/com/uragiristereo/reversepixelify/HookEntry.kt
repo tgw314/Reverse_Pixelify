@@ -54,10 +54,8 @@ class HookEntry : IYukiHookXposedInit {
                     injectMember {
                         method { name = pixelPropUtilClass.methodName }
 
-                        beforeHook {
+                        replaceUnit {
                             log("Revert spoofing globally")
-
-                            resultNull()
                         }
                     }
                 }
